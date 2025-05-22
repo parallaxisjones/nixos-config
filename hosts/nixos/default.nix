@@ -1,7 +1,7 @@
 { config, inputs, lib, pkgs, agenix, ... }:
 
-let user = "dustin";
-    keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOk8iAnIaa1deoc7jw8YACPNVka1ZFJxhnU4G74TmS+p" ]; in
+let user = "parallaxis";
+    keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAao6hYRda8Dc88DgWHblVFV/HFCcj6kJuDWq7oqt7Aq" ]; in
 {
   imports = [
     ../../modules/nixos/secrets.nix
@@ -31,7 +31,7 @@ let user = "dustin";
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking = {
-    hostName = "felix"; # Define your hostname.
+    hostName = "nixos"; # Define your hostname.
     useDHCP = false;
     interfaces.eno1.useDHCP = true;
   };
@@ -66,14 +66,7 @@ let user = "dustin";
     xserver = {
       enable = true;
 
-      videoDrivers = [ "nvidia" ];
-
-      # This helps fix tearing of windows for Nvidia cards
-      screenSection = ''
-        Option       "metamodes" "nvidia-auto-select +0+0 {ForceFullCompositionPipeline=On}"
-        Option       "AllowIndirectGLXProtocol" "off"
-        Option       "TripleBuffer" "on"
-      '';
+      videoDrivers = [ "amdgpu" ];
 
       # LightDM Display Manager
       displayManager.defaultSession = "none+bspwm";
@@ -104,45 +97,7 @@ let user = "dustin";
       drivers = [ pkgs.brlaser ]; # Brother printer driver
     };
 
-    syncthing = {
-      enable = true;
-      openDefaultPorts = true;
-      dataDir = "/home/${user}/.local/share/syncthing";
-      configDir = "/home/${user}/.config/syncthing";
-      user = "${user}";
-      group = "users";
-      guiAddress = "127.0.0.1:8384";
-      overrideFolders = true;
-      overrideDevices = true;
-
-      settings = {
-        devices = {
-          "Macbook Pro" = {
-            id = "P2FYLQW-PKDFJGZ-EUGI2T7-OW4AH4I-KI462HD-U2VL3X3-GN55PP2-VNRE5AH";
-            autoAcceptFolders = true;
-            allowedNetwork = "192.168.0.0/16";
-            addresses = [ "tcp://192.168.0.99:51820" ];
-          };
-          "Home Lab" = {
-            id = "WW5O366-THBBBA3-HKQAYCP-EWADS4I-4KDDC5Z-3JCO42M-RLBZ3DY-NM7PEQA";
-            allowedNetwork = "192.168.0.0/16";
-            autoAcceptFolders = true;
-            addresses = [ "tcp://192.168.0.103:51820" ];
-          };
-        };
-
-        folders = {
-          "XDG Share" = {
-            id = "ukrub-quh7k";
-            path = "/home/${user}/.local/share";
-            devices = [ "Macbook Pro" "Home Lab" ];
-          };
-        };
-
-        options.globalAnnounceEnabled = false; # Only sync on LAN
-      };
-
-    };
+    syncthing.enable = false;
 
     # Picom, my window compositor with fancy effects
     #
@@ -253,7 +208,7 @@ let user = "dustin";
   };
 
   # Enable sound
-  sound.enable = true;
+  #sound.enable = true;
   hardware = {
     pulseaudio.enable = true;
 

@@ -14,7 +14,7 @@ shared-packages ++ [
   gnumake
   cmake
   home-manager
-
+  steam
   # Media and design tools
   gimp
   vlc
@@ -40,7 +40,7 @@ shared-packages ++ [
   #tdesktop # telegram desktop
 
   # Testing and development tools
-  beekeeper-studio
+  #beekeeper-studio
   cypress # Functional testing framework using headless chrome
   chromedriver
   direnv

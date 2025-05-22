@@ -50,7 +50,11 @@ with pkgs; [
   terraform
   terraform-ls
   tflint
-
+  neovim
+  zellij
+  zsh
+  cargo
+  rustc
   # Media-related packages
   emacs-all-the-icons-fonts
   imagemagick

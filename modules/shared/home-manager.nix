@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 
-let name = "Dustin Lyons";
-    user = "dustin";
-    email = "dustin@dlyons.dev"; in
+let name = "Parker Jones";
+    user = "parallaxis";
+    email = "parker.jones@rithum.com"; in
 {
 
   direnv = {
@@ -51,8 +51,8 @@ let name = "Dustin Lyons";
 
       # Emacs is my editor
       export ALTERNATE_EDITOR=""
-      export EDITOR="emacsclient -t"
-      export VISUAL="emacsclient -c -a emacs"
+      export EDITOR="nvim"
+      export VISUAL="nvim"
       e() {
           emacsclient -t "$@"
       }
@@ -88,12 +88,17 @@ let name = "Dustin Lyons";
     extraConfig = {
       init.defaultBranch = "main";
       core = {
-	    editor = "vim";
+	editor = "nvim";
         autocrlf = "input";
       };
       commit.gpgsign = true;
       pull.rebase = true;
       rebase.autoStash = true;
+      # Use SSH‐based commit signing…
+      gpg = {
+      	format = "ssh";
+	sshProgram = "${pkgs._1password-gui}/bin/op-ssh-sign";
+      };
     };
   };
 

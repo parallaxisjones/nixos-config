@@ -28,13 +28,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     secrets = {
-      url = "git+ssh://git@github.com/dustinlyons/nix-secrets.git";
+      url = "git+ssh://git@github.com/parallaxisjones/nix-secrets.git";
       flake = false;
     };
   };
   outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, nixpkgs, disko, agenix, secrets } @inputs:
     let
-      user = "dustin";
+      user = "parallaxis";
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
       darwinSystems = [ "aarch64-darwin" "x86_64-darwin" ];
       forAllSystems = f: nixpkgs.lib.genAttrs (linuxSystems ++ darwinSystems) f;
@@ -42,7 +42,7 @@
         default = with pkgs; mkShell {
           nativeBuildInputs = with pkgs; [ bashInteractive git age age-plugin-yubikey ];
           shellHook = with pkgs; ''
-            export EDITOR=vim
+            export EDITOR=nvim
           '';
         };
       };
@@ -121,10 +121,11 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
+		backupFileExtension = "backup";
                 users.${user} = import ./modules/nixos/home-manager.nix;
               };
             }
-            ./hosts/nixos
+            ./hosts/nixos/configuration.nix
           ];
         }
       );

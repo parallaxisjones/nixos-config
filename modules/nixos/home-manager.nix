@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  user = "dustin";
+  user = "parallaxis";
   xdg_configHome  = "/home/${user}/.config";
   shared-programs = import ../shared/home-manager.nix { inherit config pkgs lib; };
   shared-files = import ../shared/files.nix { inherit config pkgs; };
@@ -68,7 +68,7 @@ in
     };
 
     polybar = {
-      enable = true;
+      enable = false;
       config = polybar-config;
       extraConfig = polybar-bars + polybar-colors + polybar-modules + polybar-user_modules;
       package = pkgs.polybarFull;

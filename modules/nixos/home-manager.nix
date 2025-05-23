@@ -5,7 +5,9 @@ let
   xdg_configHome  = "/home/${user}/.config";
   shared-programs = import ../shared/home-manager.nix { inherit config pkgs lib; };
   shared-files = import ../shared/files.nix { inherit config pkgs; };
-
+  wallpaper-roation = import ../gnome/random-wallpaper.nix {
+    inherit config pkgs lib;
+  };
   polybar-user_modules = builtins.readFile (pkgs.substituteAll {
     src = ./config/polybar/user_modules.ini;
     packages = "${xdg_configHome}/polybar/bin/check-nixos-updates.sh";
@@ -40,7 +42,7 @@ in
     file = shared-files // import ./files.nix { inherit user pkgs; };
     stateVersion = "21.05";
   };
-
+  imports = [ wallpaper-roation ];
   # Use a dark theme
   gtk = {
     enable = true;

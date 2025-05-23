@@ -63,5 +63,9 @@ in
   ".ssh/pgp_github.pub" = {
     text = githubPublicSigningKey;
   };
-  ".config/nvim".source = ./config/nvim;
+  ".config/nvim" = {
+    source = ./config/nvim;
+    recursive = true;
+  };
+
 }

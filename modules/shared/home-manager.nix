@@ -40,40 +40,20 @@ let name = "Parker Jones";
       # Define variables for directories
       export PATH=$HOME/.pnpm-packages/bin:$HOME/.pnpm-packages:$PATH
       export PATH=$HOME/.npm-packages/bin:$HOME/bin:$PATH
-      export PATH=$HOME/.composer/vendor/bin:$PATH
       export PATH=$HOME/.local/share/bin:$PATH
-
+      export PATH=$HOME/.go/bin:$PATH
       # Remove history data we don't want to see
       export HISTIGNORE="pwd:ls:cd"
 
-      # Ripgrep alias
-      alias search='rg -p --glob "!node_modules/*" --glob "!vendor/*" "$@"'
-
-      # Emacs is my editor
       export ALTERNATE_EDITOR=""
       export EDITOR="nvim"
       export VISUAL="nvim"
-      e() {
-          emacsclient -t "$@"
-      }
-
-      # Laravel Artisan
-      alias art='php artisan'
-
-      # PHP Deployer
-      alias deploy='dep deploy'
-
-      # Easy alias to trim whitespace from files on macOS
-      alias trimwhitespace="find . -type f \( -name '*.jsx' -o -name '*.php' -o -name '*.js' \) -exec sed -i \"\" 's/[[:space:]]*\$//' {} +"
 
       # Use difftastic, syntax-aware diffing
       alias diff=difft
 
       # Always color ls and group directories
       alias ls='ls --color=auto'
-
-      # Reboot into my dual boot Windows partition
-      alias windows='systemctl reboot --boot-loader-entry=auto-windows'
     '';
   };
 

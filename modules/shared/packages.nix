@@ -34,7 +34,7 @@ with pkgs; [
   uv
 
   # Encryption and security tools
-  _1password
+  _1password-cli
   age
   age-plugin-yubikey
   gnupg

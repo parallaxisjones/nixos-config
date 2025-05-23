@@ -71,6 +71,7 @@ let name = "Parker Jones";
 	editor = "nvim";
         autocrlf = "input";
       };
+      difftastic.enable = true;
       commit.gpgsign = true;
       pull.rebase = true;
       rebase.autoStash = true;

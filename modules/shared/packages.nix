@@ -53,8 +53,6 @@ with pkgs; [
   neovim
   zellij
   zsh
-  cargo
-  rustc
   # Media-related packages
   emacs-all-the-icons-fonts
   imagemagick

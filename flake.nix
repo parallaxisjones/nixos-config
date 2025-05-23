@@ -27,12 +27,16 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     secrets = {
       url = "git+ssh://git@github.com/parallaxisjones/nix-secrets.git";
       flake = false;
     };
   };
-  outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, nixpkgs, disko, agenix, secrets } @inputs:
+  outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, nixpkgs, disko, agenix, fenix, secrets } @inputs:
     let
       user = "parallaxis";
       linuxSystems = [ "x86_64-linux" "aarch64-linux" ];
@@ -75,16 +79,6 @@
       };
     in
     {
-      templates = {
-        starter = {
-          path = ./templates/starter;
-          description = "Starter configuration";
-        };
-        starter-with-secrets = {
-          path = ./templates/starter-with-secrets;
-          description = "Starter configuration with secrets";
-        };
-      };
       devShells = forAllSystems devShell;
       apps = nixpkgs.lib.genAttrs linuxSystems mkLinuxApps // nixpkgs.lib.genAttrs darwinSystems mkDarwinApps;
       darwinConfigurations = nixpkgs.lib.genAttrs darwinSystems (system:
@@ -121,10 +115,23 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-		backupFileExtension = "backup";
+		            backupFileExtension = "backup";
                 users.${user} = import ./modules/nixos/home-manager.nix;
               };
             }
+            ({ pkgs, ... }: {
+              nixpkgs.overlays = [ fenix.overlays.default ];
+              environment.systemPackages = with pkgs; [
+              (fenix.packages.${system}.complete.withComponents [
+                "cargo"
+                "clippy"
+                "rust-src"
+                "rustc"
+                "rustfmt"
+              ])
+              rust-analyzer-nightly
+            ];
+          })
             ./hosts/nixos/configuration.nix
           ];
         }

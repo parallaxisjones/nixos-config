@@ -43,10 +43,10 @@ in
     description = "Rotate GNOME wallpaper hourly";
     wantedBy    = [ "timers.target" ];
     timerConfig = {
-      OnUnitActiveSec = "1min";
-      Persistent      = true;  # if the machine was off, run at next login
-      # OnCalendar = "hourly";
-      # Persistent = true;  # if the machine was off/missed a beat, run at next boot
+      # OnUnitActiveSec = "1min";
+      # Persistent      = true;  # if the machine was off, run at next login
+      OnCalendar = "hourly";
+      Persistent = true;  # if the machine was off/missed a beat, run at next boot
     };
   };
 }

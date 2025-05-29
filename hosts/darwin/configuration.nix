@@ -15,8 +15,8 @@
       pkgs.rage
     ];
     # Auto upgrade nix package and the daemon service.
-    services.nix-daemon.enable = true;
-    services.karabiner-elements.enable = true;
+    # services.nix-daemon.enable = true;
+    # services.karabiner-elements.enable = true;
     # nix.package = pkgs.nix;
 
     # Necessary for using flakes on this system.
@@ -30,7 +30,7 @@
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog
     system.stateVersion = 4;
-
+    system.primaryUser = "pjones";
     # The platform the configuration will be used on.
     nixpkgs.hostPlatform = "aarch64-darwin";
     nixpkgs.config.allowUnfree = true;

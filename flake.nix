@@ -116,7 +116,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
 		            backupFileExtension = "backup";
-                users.${user} = import ./modules/nixos/home-manager.nix;
+                users."pjones" = import ./modules/nixos/home-manager.nix;
               };
             }
             ({ pkgs, ... }: {

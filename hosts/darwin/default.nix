@@ -1,5 +1,5 @@
 { agenix, config, pkgs, ... }:
-let user = "dustin"; in
+let user = "pjones"; in
 {
   imports = [
     ../../modules/darwin/secrets.nix

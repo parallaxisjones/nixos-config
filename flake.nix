@@ -101,7 +101,7 @@
                 autoMigrate = true;
               };
             }
-            ./hosts/darwin
+            ./hosts/darwin/configuration.nix
           ];
         }
       );

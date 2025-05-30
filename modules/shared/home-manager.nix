@@ -2,6 +2,7 @@
 
 let name = "Parker Jones";
     user = "parallaxis";
+    workUser = "pjones";
     email = "parker.jones@rithum.com"; in
 {
 
@@ -257,7 +258,7 @@ let name = "Parker Jones";
         "/home/${user}/.ssh/config_external"
       )
       (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
-        "/Users/${user}/.ssh/config_external"
+        "/Users/${workUser}/.ssh/config_external"
       )
     ];
     matchBlocks = {
@@ -268,7 +269,7 @@ let name = "Parker Jones";
             "/home/${user}/.ssh/id_github"
           )
           (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
-            "/Users/${user}/.ssh/id_github"
+            "/Users/${workUser}/.ssh/id_github"
           )
         ];
       };

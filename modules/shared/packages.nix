@@ -87,6 +87,7 @@ with pkgs; [
   # Source code management, Git, GitHub tools
   gh
 
+  tig
   # Text and terminal utilities
   htop
   hunspell

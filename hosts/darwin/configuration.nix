@@ -1,63 +1,71 @@
-# configuration.nix
+{ config, pkgs, home-manager, ... }:
 
-{ pkgs, ... }: 
-
+let
+  # Pull in nix-darwin’s Home Manager engine (provided by the home-manager flake input)
+  darwinHM = home-manager.darwinModules.home-manager;
+in
 {
-    # List packages installed in system profile. To search by name, run:
-    # $ nix-env -qaP | grep wget
-    environment.systemPackages =
-    [
-      pkgs.nodejs
-      #pkgs.rustup 
-      pkgs.vim
-      pkgs.neovim
-      pkgs.tmux
-      pkgs.rage
-    ];
-    # Auto upgrade nix package and the daemon service.
-    # services.nix-daemon.enable = true;
-    # services.karabiner-elements.enable = true;
-    # nix.package = pkgs.nix;
+  # 1) Import the Home Manager engine into nix-darwin
+  # 2) Your per-user Home Manager config from the flake
+  # 3) Any shared HM definitions
+  imports = [
+    darwinHM
+    ../../modules/darwin/home-manager.nix
+    ../../modules/shared
+  ];
 
-    # Necessary for using flakes on this system.
-    nix.settings.experimental-features = "nix-command flakes";
+  # Enable Home Manager
+  # programs.home-manager.enable = true;
 
-    # Create /etc/zshrc that loads the nix-darwin environment.
-    
-    programs.zsh.enable = true;  # default shell on catalina
-    # programs.fish.enable = true;
+  # System-wide packages to install in /usr/local
+  environment.systemPackages = with pkgs; [
+    nodejs
+    vim
+    neovim
+    tmux
+    rage
+  ];
 
-    # Used for backwards compatibility, please read the changelog before changing.
-    # $ darwin-rebuild changelog
-    system.stateVersion = 4;
-    system.primaryUser = "pjones";
-    # The platform the configuration will be used on.
-    nixpkgs.hostPlatform = "aarch64-darwin";
-    nixpkgs.config.allowUnfree = true;
+  # Uncomment to auto-upgrade the nix-daemon, etc.
+  # services.nix-daemon.enable = true;
+  # services.karabiner-elements.enable = true;
 
-    users.users.pjones = {
-        name = "pjones";
-        home = "/Users/pjones";
-        shell = pkgs.zsh;
+  # Enable experimental flakes support
+  nix.settings.experimental-features = "nix-command flakes";
+
+  # Use Zsh as the default shell
+  programs.zsh.enable = true;
+
+  # Darwin-specific settings
+  system.stateVersion  = 4;
+  system.primaryUser   = "pjones";
+  nixpkgs.hostPlatform = "aarch64-darwin";
+  nixpkgs.config.allowUnfree = true;
+
+  # Define the macOS user
+  users.users.pjones = {
+    # isNormalUser = true;
+    home         = "/Users/pjones";
+    shell        = pkgs.zsh;
+  };
+
+  # macOS defaults for Finder and Dock
+  system.defaults = {
+    dock = {
+      autohide                 = true;
+      orientation              = "bottom";
+      show-process-indicators  = false;
+      show-recents             = false;
+      static-only              = true;
     };
-
-    system.defaults = {
-      dock = {
-        autohide = true;
-        orientation = "bottom";
-        show-process-indicators = false;
-        show-recents = false;
-        static-only = true;
-      };
-      finder = {
-        AppleShowAllExtensions = true;
-        ShowPathbar = true;
-        FXEnableExtensionChangeWarning = false;
-      };
-      NSGlobalDomain = {
-        AppleKeyboardUIMode = 3;
-        "com.apple.keyboard.fnState" = true;
-      };
+    finder = {
+      AppleShowAllExtensions          = true;
+      ShowPathbar                     = true;
+      FXEnableExtensionChangeWarning  = false;
     };
+    NSGlobalDomain = {
+      AppleKeyboardUIMode      = 3;
+      "com.apple.keyboard.fnState" = true;
+    };
+  };
 }
-

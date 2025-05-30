@@ -1,7 +1,7 @@
 { config, pkgs, lib, home-manager, ... }:
 
 let
-  user           = "dustin";
+  user           = "pjones";
   myEmacsLauncher = pkgs.writeScript "emacs-launcher.command" ''
     #!/bin/sh
     emacsclient -c -n &
@@ -18,7 +18,7 @@ in
     name     = "${user}";
     home     = "/Users/${user}";
     isHidden = false;
-    shell    = pkgs.zsh;
+    # shell    = pkgs.zsh;
   };
 
   homebrew = {
@@ -34,10 +34,10 @@ in
     #
     enable = true;
     casks  = pkgs.callPackage ./casks.nix {};
-    masApps = {
-      "hidden-bar"   = 1452453066;
-      "wireguard"    = 1451685025;
-    };
+    # masApps = {
+    #   "hidden-bar"   = 1452453066;
+    #   "wireguard"    = 1451685025;
+    # };
   };
 
   home-manager = {
@@ -49,8 +49,7 @@ in
           packages = pkgs.callPackage ./packages.nix {};
           file = lib.mkMerge [
             sharedFiles
-            additionalFiles
-            { "emacs-launcher.command".source = myEmacsLauncher; }
+            # additionalFiles
           ];
           stateVersion = "23.11";
         };
@@ -66,29 +65,7 @@ in
     entries  = [
       { path = "/Applications/Slack.app/"; }
       { path = "/System/Applications/Messages.app/"; }
-      { path = "/System/Applications/Facetime.app/"; }
-      { path = "/Applications/Telegram.app/"; }
       { path = "${pkgs.alacritty}/Applications/Alacritty.app/"; }
-      { path = "/System/Applications/Music.app/"; }
-      { path = "/System/Applications/News.app/"; }
-      { path = "/System/Applications/Photos.app/"; }
-      { path = "/System/Applications/Photo Booth.app/"; }
-      { path = "/System/Applications/TV.app/"; }
-      { path = "${pkgs.jetbrains.phpstorm}/Applications/PhpStorm.app/"; }
-      { path = "/Applications/TablePlus.app/"; }
-      { path = "/Applications/Asana.app/"; }
-      { path = "/Applications/Drafts.app/"; }
-      { path = "/System/Applications/Home.app/"; }
-      { path = "/Applications/iPhone Mirroring.app/"; }
-      {
-        path    = toString myEmacsLauncher;
-        section = "others";
-      }
-      {
-        path    = "${config.users.users.${user}.home}/.local/share/";
-        section = "others";
-        options = "--sort name --view grid --display folder";
-      }
       {
         path    = "${config.users.users.${user}.home}/.local/share/downloads";
         section = "others";

@@ -9,21 +9,21 @@ _:
   "ngrok"
   "postico"
   "visual-studio-code"
-  "wireshark"
+  # "wireshark"
 
   # Communication Tools
   "discord"
   "loom"
   "slack"
-  "telegram"
-  "zoom"
+  # "telegram"
+  # "zoom"
 
   # Utility Tools
   "appcleaner"
   "syncthing"
 
   # Entertainment Tools
-  "steam"
+  # "steam"
   "vlc"
 
   # Productivity Tools

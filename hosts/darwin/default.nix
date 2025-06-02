@@ -11,9 +11,17 @@ let user = "pjones"; in
   nix = {
     package = pkgs.nix;
     settings = {
-      trusted-users = [ "@admin" "${user}" ];
-      substituters = [ "https://nix-community.cachix.org" "https://cache.nixos.org" ];
-      trusted-public-keys = [ "parallaxisjones.cachix.org-1:A85H34pyLFZq2A3A0hB32/8CXuFNS3e4Js+KlKlP43Q=" ];
+      # Space-separate all substituters on one line
+      substituters =
+        "https://cache.nixos.org https://nix-community.cachix.org https://parallaxisjones.cachix.org";
+
+      # Space-separate all public keys on one line
+      trusted-public-keys =
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= \
+         parallaxisjones.cachix.org-1:A85H34pyLFZq2A3A0hB32/8CXuFNS3e4Js+KlKlP43Q=";
+
+      # Space-separate trusted users (root must stay first)
+      trusted-users = "root pjones";
     };
     gc = {
       automatic = true;

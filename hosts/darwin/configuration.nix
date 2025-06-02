@@ -13,7 +13,35 @@ in
     ../../modules/darwin/home-manager.nix
     ../../modules/shared
   ];
+  nix = {
+    package = pkgs.nix;
+    settings = {
+      substituters = [
+        "https://cache.nixos.org"
+        "https://nix-community.cachix.org"
+        "https://parallaxisjones.cachix.org"
+      ];
 
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "parallaxisjones.cachix.org-1:A85H34pyLFZq2A3A0hB32/8CXuFNS3e4Js+KlKlP43Q="
+      ];
+
+      trusted-users = [
+        "root"
+        "pjones"
+      ];
+    };
+    gc = {
+      automatic = true;
+      interval = { Weekday = 0; Hour = 2; Minute = 0; };
+      options = "--delete-older-than 30d";
+    };
+    # Turn this on to make command line easier
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
   # Enable Home Manager
   # programs.home-manager.enable = true;
 

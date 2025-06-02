@@ -9,6 +9,8 @@ end
 require("core.utils").load_mappings()
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+local lockfile_path = vim.fn.stdpath "state" .. "/lazy-lock.json"
+vim.g.lazy_lockfile = lockfile_path
 
 -- bootstrap lazy.nvim!
 if not vim.loop.fs_stat(lazypath) then

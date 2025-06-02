@@ -13,7 +13,7 @@ let user = "pjones"; in
     settings = {
       trusted-users = [ "@admin" "${user}" ];
       substituters = [ "https://nix-community.cachix.org" "https://cache.nixos.org" ];
-      trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
+      trusted-public-keys = [ "parallaxisjones.cachix.org-1:A85H34pyLFZq2A3A0hB32/8CXuFNS3e4Js+KlKlP43Q=" ];
     };
     gc = {
       automatic = true;

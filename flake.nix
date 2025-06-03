@@ -31,12 +31,13 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    secrets = {
+    secretRepo = {
       url = "git+ssh://git@github.com/parallaxisjones/nix-secrets.git";
+      ref   = "main";
       flake = false;
     };
   };
-  outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, nixpkgs, disko, agenix, fenix, secrets } @inputs:
+  outputs = { self, darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, nixpkgs, disko, agenix, fenix, secretsRepo } @inputs:
     let
       user = "parallaxis";
       workUser = "pjones";

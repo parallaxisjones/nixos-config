@@ -12,7 +12,6 @@ in
 {
   imports = [
     ./dock
-    ./secrets.nix
   ];
 
   users.users.${user} = {
@@ -29,7 +28,7 @@ in
 
   home-manager = {
     useGlobalPkgs = true;
-    users.${user} = { pkgs, config, lib, agenix, secrets, ... }: {
+    users.${user} = { pkgs, config, lib, agenix, secretsRepo, ... }: {
       home = {
         enableNixpkgsReleaseCheck = false;
         packages                 = pkgs.callPackage ./packages.nix {};
@@ -70,6 +69,7 @@ in
       imports = [
         # "${agenix}/modules/age-home.nix"
         agenix.homeManagerModules.default
+        ./secrets.nix
       ];
       # ─────────────────────────────────────────────────────────────────────────
       programs = {} // import ../shared/home-manager.nix { inherit config pkgs lib; };

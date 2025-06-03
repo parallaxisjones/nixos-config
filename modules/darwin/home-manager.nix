@@ -11,7 +11,7 @@ let
 in
 {
   imports = [
-    (agenix.homeManagerModules.default { inherit secrets; })
+    agenix.homeManagerModules.default
     ./dock
   ];
 

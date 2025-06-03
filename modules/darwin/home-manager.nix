@@ -1,4 +1,4 @@
-{ config, pkgs, lib, home-manager, agenix, ... }:
+{ config, pkgs, lib, home-manager, ... }:
 
 let
   user            = "pjones";

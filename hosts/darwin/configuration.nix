@@ -1,4 +1,4 @@
-{ config, pkgs, home-manager, ... }:
+{ config, pkgs, home-manager, agenix, ... }:
 
 let
   # Pull in nix-darwin’s Home Manager engine (provided by the home-manager flake input)

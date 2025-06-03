@@ -102,7 +102,7 @@
                 autoMigrate = true;
               };
             }
-            ./modules/shared/secrets.nix
+            # ./modules/shared/secrets.nix
             ./hosts/darwin/configuration.nix
           ];
         }
@@ -134,7 +134,7 @@
               rust-analyzer-nightly
             ];
           })
-            ./modules/shared/secrets.nix
+            # ./modules/shared/secrets.nix
             ./hosts/nixos/configuration.nix
           ];
         }

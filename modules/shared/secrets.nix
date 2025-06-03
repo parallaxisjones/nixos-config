@@ -1,62 +1,29 @@
 { config, pkgs, lib, agenix, ... }:
 
 let
-  # ────────────────────────────────────────────────────────────────────────────
-  # 1) Define each user’s SSH public key (the actual "ssh-ed25519 AAAA…"-style string).
-  #
-  #    - On macOS you want “pjones” to be able to decrypt the Darwin-specific secrets.
-  #    - On NixOS you want “parallaxis” to be able to decrypt the Linux-specific secrets.
-  #
-  pjonesPublicKey     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAao6hYRda8Dc88DgWHblVFV/HFCcj6kJuDWq7oqt7Aq";
-  parallaxisPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAao6hYRda8Dc88DgWHblVFV/HFCcj6kJuDWq7oqt7Aq";
+  # 1) Point to your actual .pub files on each machine:
+  pjonesPublicKey     = builtins.readFile "/Users/pjones/.ssh/parallaxis.pub";
+  parallaxisPublicKey = builtins.readFile "/home/parallaxis/.ssh/parallaxis.pub";
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # 2) Declare which platforms we want agenix to produce secrets for.
-  #    We build for both:
-  #      • x86_64-linux (regular NixOS),
-  #      • aarch64-darwin (Apple Silicon macOS) [and we could also list x86_64-darwin if needed].
-  #
+  # 2) List the platforms for which we want secrets:
   systems = [ "x86_64-linux" "aarch64-darwin" ];
-
 in
-{
-  # ────────────────────────────────────────────────────────────────────────────
-  # 3) Tell agenix about all of our encrypted files in “./modules/shared/secrets/”.
-  #
-  #    Each key here must match exactly the “.age” file name relative to the flake root.
-  #
-  #    We will decrypt:
-  #       • “darwin-syncthing-cert.age”   → only pjones can read it on aarch64-darwin
-  #       • “darwin-syncthing-key.age”    → only pjones on aarch64-darwin
-  #       • “nixos-syncthing-cert.age”    → only parallaxis on x86_64-linux
-  #       • “nixos-syncthing-key.age”     → only parallaxis on x86_64-linux
-  #       • “openai-key.age”              → both pjones + parallaxis on both systems
-  #       • “github-ssh-key.age”          → only pjones on darwin (for pushing via git over macOS)
-  #       • …etc. (add more as needed)
-  #
-  age = agenix.lib.secrets {
-    inherit systems;
 
-    users = {
-      pjones = { publicKeys = [ pjonesPublicKey ]; };
-      parallaxis = { publicKeys = [ parallaxisPublicKey ]; };
-    };
+# 3) Wrap the argument to agenix.lib.secrets in `rec { … }` so that
+#    “pjones” and “parallaxis” (the user‐labels) are in scope
+age = agenix.lib.secrets (rec {
+  inherit systems;
 
-    ageFiles = rec {
-      # ─ macOS-only secrets (decryptable by "pjones"):
-      # "darwin-syncthing-cert.age".publicKeys   = [ pjones ];
-      # "darwin-syncthing-key.age".publicKeys    = [ pjones ];
+  users = {
+    # macOS (“pjones”) can decrypt macOS-only secrets
+    pjones = { publicKeys = [ pjonesPublicKey ]; };
 
-      # ─ NixOS-only secrets (decryptable by "parallaxis"):
-      # "nixos-syncthing-cert.age".publicKeys    = [ parallaxis ];
-      # "nixos-syncthing-key.age".publicKeys     = [ parallaxis ];
-
-      # ─ Shared secret, both machines need the same OpenAI key:
-      "openai-key.age".publicKeys              = [ pjones parallaxis ];
-
-      # ─ GitHub SSH/SIGNING keys: only macOS (pjones) needs to decrypt them
-      # "github-ssh-key.age".publicKeys          = [ pjones parallaxis ];
-      # "github-signing-key.age".publicKeys      = [ pjones parallaxis ];
-    };
+    # NixOS (“parallaxis”) can decrypt Linux-only secrets
+    parallaxis = { publicKeys = [ parallaxisPublicKey ]; };
   };
-}
+
+  ageFiles = {
+    # openai-key.age should be decrypted by *both* labels
+    "openai-key.age".publicKeys = [ pjones parallaxis ];
+  };
+});

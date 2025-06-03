@@ -4,10 +4,18 @@ let user = "pjones"; in
 {
   age = { 
     identityPaths = [ 
-      "/Users/${user}/.ssh/id_ed25519"
+      "/Users/${user}/.ssh/parallaxis"
     ];
 
-    secrets = { 
+    secrets = {
+      "openai-key" = {
+        symlink = true;   # “after decrypt, symlink into the target path”
+        path    = "/Users/${user}/.config/nvim/openai_key.txt";
+        file    = "${secrets}/openai-key.age";   # <— the “openai-key.age” inside your secrets repo
+        mode    = "600";
+        owner   = "${user}";
+        group   = "staff";
+      };
       # "syncthing-cert" = {
       #   symlink = true;
       #   path = "/Users/${user}/Library/Application Support/Syncthing/cert.pem";

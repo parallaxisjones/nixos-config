@@ -12,6 +12,7 @@ in
 {
   imports = [
     ./dock
+    ./secrets.nix
   ];
 
   users.users.${user} = {
@@ -28,7 +29,7 @@ in
 
   home-manager = {
     useGlobalPkgs = true;
-    users.${user} = { pkgs, config, lib, ... }: {
+    users.${user} = { pkgs, config, lib, agenix, secrets, ... }: {
       home = {
         enableNixpkgsReleaseCheck = false;
         packages                 = pkgs.callPackage ./packages.nix {};
@@ -62,7 +63,15 @@ in
         ];
         stateVersion = "23.11";
       };
-
+      # ─────────────────────────────────────────────────────────────────────────
+      #  IMPORT Ag​enix’s “age-home.nix” so that ‘age’ attributes (from secrets.nix)
+      #  actually get applied at activation time.
+      #
+      imports = [
+        # "${agenix}/modules/age-home.nix"
+        agenix.homeManagerModules.default
+      ];
+      # ─────────────────────────────────────────────────────────────────────────
       programs = {} // import ../shared/home-manager.nix { inherit config pkgs lib; };
       manual.manpages.enable = false;
     };

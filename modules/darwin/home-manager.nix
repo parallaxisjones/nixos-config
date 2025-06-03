@@ -1,4 +1,4 @@
-{ config, pkgs, lib, home-manager, agenix, secrets, ... }:
+{ config, pkgs, lib, home-manager, ... }:
 
 let
   user            = "pjones";
@@ -63,14 +63,9 @@ in
         ];
         stateVersion = "23.11";
       };
-      # ─────────────────────────────────────────────────────────────────────────
-      #  IMPORT Ag​enix’s “age-home.nix” so that ‘age’ attributes (from secrets.nix)
-      #  actually get applied at activation time.
-      #
-      imports = [
+      modules = [
         agenix.homeManagerModules.default
-        # "${agenix}/modules/age-home.nix"
-        # ./secrets.nix
+        ./secrets.nix
       ];
       # ─────────────────────────────────────────────────────────────────────────
       programs = {} // import ../shared/home-manager.nix { inherit config pkgs lib; };

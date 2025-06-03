@@ -11,7 +11,7 @@ let
 in
 {
   imports = [
-    agenix.homeManagerModules.default
+    # agenix.homeManagerModules.default
     ./dock
   ];
 
@@ -29,7 +29,7 @@ in
 
   home-manager = {
     useGlobalPkgs = true;
-    users.${user} = { pkgs, config, lib, ... }: {
+    users.${user} = { pkgs, config, lib, agenix, ... }: {
       home = {
         enableNixpkgsReleaseCheck = false;
         packages                 = pkgs.callPackage ./packages.nix {};
@@ -68,8 +68,9 @@ in
       #  actually get applied at activation time.
       #
       imports = [
+        agenix.homeManagerModules.default
         # "${agenix}/modules/age-home.nix"
-        ./secrets.nix
+        # ./secrets.nix
       ];
       # ─────────────────────────────────────────────────────────────────────────
       programs = {} // import ../shared/home-manager.nix { inherit config pkgs lib; };

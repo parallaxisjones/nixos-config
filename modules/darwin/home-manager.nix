@@ -65,7 +65,7 @@ in
       };
       imports = [
         agenix.homeManagerModules.default
-        ./secrets.nix 
+        # ./secrets.nix 
       ];
       # ─────────────────────────────────────────────────────────────────────────
       programs = {} // import ../shared/home-manager.nix { inherit config pkgs lib; };

@@ -34,14 +34,28 @@ in
         packages                 = pkgs.callPackage ./packages.nix {};
         file = lib.mkMerge [
           sharedFiles
-          # additionalFiles
+          # ──────────────────────────────────────────────────────────────────────
+          # 1) Ensure ~/.cache/nvim/avante/clipboard exists
+          {
+            ".cache/nvim/avante/clipboard/.placeholder".text = "";
+          }
 
-          # Create a placeholder file under ~/.local/share/nvim/lazy so the directory exists
+          # 2) Ensure ~/.local/share/nvim/avante/clipboard exists
+          {
+            ".local/share/nvim/avante/clipboard/.placeholder".text = "";
+          }
+
+          # 3) Ensure ~/.local/state/nvim/avante exists (if Avante ever writes there)
+          {
+            ".local/state/nvim/avante/.placeholder".text = "";
+          }
+
+          # 4) You already want ~/.local/share/nvim/lazy for Lazy.nvim
           {
             ".local/share/nvim/lazy/.placeholder".text = "";
           }
 
-          # Create a placeholder file under ~/.local/state/nvim so the directory exists
+          # 5) And ~/.local/state/nvim (for Lazy’s lockfile)
           {
             ".local/state/nvim/.placeholder".text = "";
           }

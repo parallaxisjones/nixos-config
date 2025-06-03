@@ -14,6 +14,12 @@ M.ui = {
 
 M.plugins = "custom.plugins"
 
+-- ──────────────────────────────────────────────────────────────────────────────
+-- Force Lazy.nvim’s lockfile into ~/.local/state/nvim/lazy-lock.json:
+local default_lazy = require("plugins.configs.lazy_nvim")
+default_lazy.lockfile = vim.fn.stdpath("state") .. "/lazy-lock.json"
+M.lazy_nvim = default_lazy
+-- ──────────────────────────────────────────────────────────────────────────────
 -- check core.mappings for table structure
 M.mappings = require "custom.mappings"
 

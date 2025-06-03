@@ -310,7 +310,7 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-nk6e9sGJ0YglUjNfaybIxUczKpJlwxeq9T3TX8Y0eyI=",
+        "narHash": "sha256-nmuwhN1/VnYazuZ3RcYg3OGrQk+Q6aHTB9a1YeYnkzM=",
         "type": "file",
         "url": "https://git@github.com/parallaxisjones/nix-secrets.git?ref=main"
       },

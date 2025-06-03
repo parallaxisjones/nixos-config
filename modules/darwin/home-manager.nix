@@ -29,7 +29,7 @@ in
 
   home-manager = {
     useGlobalPkgs = true;
-    users.${user} = { pkgs, config, lib, agenix, ... }: {
+    users.${user} = { pkgs, config, lib, ... }: {
       home = {
         enableNixpkgsReleaseCheck = false;
         packages                 = pkgs.callPackage ./packages.nix {};
@@ -63,7 +63,7 @@ in
         ];
         stateVersion = "23.11";
       };
-      modules = [
+      imports = [
         agenix.homeManagerModules.default
         ./secrets.nix
       ];

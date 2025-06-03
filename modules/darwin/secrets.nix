@@ -14,7 +14,7 @@ let user = "pjones"; in
         file    = "${secrets}/openai-key.age";   # <— the “openai-key.age” inside your secrets repo
         mode    = "600";
         owner   = "${user}";
-        group   = "staff";
+        # group   = "staff";
       };
       # "syncthing-cert" = {
       #   symlink = true;

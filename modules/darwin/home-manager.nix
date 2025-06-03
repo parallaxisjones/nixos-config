@@ -1,4 +1,4 @@
-{ config, pkgs, lib, home-manager, ... }:
+{ config, pkgs, lib, home-manager, agenix, secrets, ... }:
 
 let
   user            = "pjones";
@@ -11,6 +11,7 @@ let
 in
 {
   imports = [
+    (agenix.homeManagerModules.default { inherit secrets; })
     ./dock
   ];
 
@@ -28,7 +29,7 @@ in
 
   home-manager = {
     useGlobalPkgs = true;
-    users.${user} = { pkgs, config, lib, agenix, secrets, ... }: {
+    users.${user} = { pkgs, config, lib, ... }: {
       home = {
         enableNixpkgsReleaseCheck = false;
         packages                 = pkgs.callPackage ./packages.nix {};
@@ -68,7 +69,6 @@ in
       #
       imports = [
         # "${agenix}/modules/age-home.nix"
-        (agenix.homeManagerModules.default { inherit secrets; })
         ./secrets.nix
       ];
       # ─────────────────────────────────────────────────────────────────────────

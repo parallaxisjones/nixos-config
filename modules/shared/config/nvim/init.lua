@@ -11,7 +11,8 @@ require("core.utils").load_mappings()
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 local lockfile_path = vim.fn.stdpath "state" .. "/lazy-lock.json"
 vim.g.lazy_lockfile = lockfile_path
-
+-- vim.o.foldmethod = "expr"
+-- vim.o.foldexpr   = "nvim_treesitter#foldexpr()"  -- UFO will override this; it just ensures expr‐mode is on
 -- bootstrap lazy.nvim!
 if not vim.loop.fs_stat(lazypath) then
   require("core.bootstrap").gen_chadrc_template()

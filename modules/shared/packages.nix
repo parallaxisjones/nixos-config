@@ -32,14 +32,16 @@ with pkgs; [
   wget
   zip
   uv
-
+  rust-analyzer 
+  rustfmt
+  libiconv
   # Encryption and security tools
   _1password-cli
   age
   age-plugin-yubikey
   gnupg
   libfido2
-
+  pkg-config
   # Cloud-related tools and SDKs
   flyctl
   google-cloud-sdk
@@ -75,7 +77,7 @@ with pkgs; [
   php82Extensions.xdebug
   php82Packages.deployer
   phpunit
-
+  cargo
   # Node.js development tools
   fzf
   nodePackages.live-server
@@ -104,4 +106,5 @@ with pkgs; [
   zsh-powerlevel10k
   eza
   myPython
+  lua-language-server
 ]

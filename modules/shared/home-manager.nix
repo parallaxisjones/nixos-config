@@ -33,7 +33,12 @@ let name = "Parker Jones";
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
         . /nix/var/nix/profiles/default/etc/profile.d/nix.sh
       fi
-
+      if [[ -f /Users/pjones/.config/op/plugins.sh ]]; then
+        source /Users/pjones/.config/op/plugins.sh
+      fi
+      if [[ -f ~/.config/op-setup.sh ]]; then
+        source ~/.config/op-setup.sh
+      fi
       if [[ "$(uname)" == "Linux" ]]; then
         alias pbcopy='xclip -selection clipboard'
       fi

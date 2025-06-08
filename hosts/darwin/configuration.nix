@@ -1,4 +1,4 @@
-{ config, pkgs, home-manager, agenix, secrets, ... }:
+{ config, pkgs, home-manager, agenix, secrets, mcp-hub, ... }:
 
 let
   # Pull in nix-darwin’s Home Manager engine (provided by the home-manager flake input)
@@ -49,9 +49,10 @@ in
   environment.systemPackages = with pkgs; [
     nodejs
     vim
-    neovim
+    # neovim
     tmux
     rage
+    mcp-hub.packages.${system}.default
   ];
 
   # Uncomment to auto-upgrade the nix-daemon, etc.

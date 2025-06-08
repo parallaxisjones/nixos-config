@@ -35,6 +35,7 @@ in
         packages                 = pkgs.callPackage ./packages.nix {};
         file = lib.mkMerge [
           sharedFiles
+          additionalFiles
           # ──────────────────────────────────────────────────────────────────────
           # 1) Ensure ~/.cache/nvim/avante/clipboard exists
           {

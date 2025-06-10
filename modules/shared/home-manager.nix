@@ -56,7 +56,7 @@ let name = "Parker Jones";
       export VISUAL="nvim"
 
       # Use difftastic, syntax-aware diffing
-      alias diff=difft
+      # alias diff=difft
 
       # Always color ls and group directories
       alias ls='ls --color=auto'
@@ -77,7 +77,7 @@ let name = "Parker Jones";
 	editor = "nvim";
         autocrlf = "input";
       };
-      difftastic.enable = true;
+      difftastic.enable = false;
       commit.gpgsign = true;
       pull.rebase = true;
       rebase.autoStash = true;

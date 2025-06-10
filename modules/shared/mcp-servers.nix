@@ -1,11 +1,11 @@
 # modules/shared/mcp-servers.nix
 { home }:
 {
-    "community-server-llm-txt" = {
-      runtime = "node";
-      command = "npx";
-      args = [ "@mcp-get-community/server-llm-txt" ];
-    };
+    # "community-server-llm-txt" = {
+    #   runtime = "node";
+    #   command = "npx";
+    #   args = [ "@mcp-get-community/server-llm-txt" ];
+    # };
     "memory" = {
       command = "npx";
       args = [ "@modelcontextprotocol/server-memory" ];
@@ -36,18 +36,18 @@
     #     "\"{}\""
     #   ];
     # };
-    "playwright-mcp-server" = {
-      command = "npx";
-      args = [
-        "-y"
-        "@smithery/cli@latest"
-        "run"
-        "@executeautomation/playwright-mcp-server"
-        "--config"
-        "\"{}\""
-      ];
-      env = { DISPLAY = ":0"; };
-    };
+    # "playwright-mcp-server" = {
+    #   command = "npx";
+    #   args = [
+    #     "-y"
+    #     "@smithery/cli@latest"
+    #     "run"
+    #     "@executeautomation/playwright-mcp-server"
+    #     "--config"
+    #     "\"{}\""
+    #   ];
+    #   env = { DISPLAY = ":0"; };
+    # };
     # "chroma" = {
     #   command = "uvx";
     #   args = [
@@ -59,25 +59,25 @@
     #   ];
     # };
 
-    "zonos-tts-mcp" = {
-      command = "node";
-      args = [ "${home}/Repositories/Zonos-TTS-MCP-Linux/dist/server.js" ];
-    };
+    # "zonos-tts-mcp" = {
+    #   command = "node";
+    #   args = [ "${home}/Repositories/Zonos-TTS-MCP-Linux/dist/server.js" ];
+    # };
     "fetch" = {
       command = "uvx";
       args = [ "mcp-server-fetch" ];
     };
-    "arxiv-mcp-server" = {
-      command = "uv";
-      args = [
-        "--directory"
-        "${home}/Repositories/arxiv-mcp-server"
-        "run"
-        "arxiv-mcp-server"
-        "--storage-path"
-        "${home}/Documents/core_bot_instruction_concepts/arxiv-papers"
-      ];
-    };
+    # "arxiv-mcp-server" = {
+    #   command = "uv";
+    #   args = [
+    #     "--directory"
+    #     "${home}/Repositories/arxiv-mcp-server"
+    #     "run"
+    #     "arxiv-mcp-server"
+    #     "--storage-path"
+    #     "${home}/Documents/core_bot_instruction_concepts/arxiv-papers"
+    #   ];
+    # };
     # "neo4j" = {
     #   command = "uvx";
     #   args = [
@@ -97,13 +97,13 @@
     #   command = "${home}/Repositories/Archon/venv/bin/python";
     #   args = [ "${home}/Repositories/Archon/mcp/mcp_server.py" ];
     # };
-    "serena" = {
-      command = "uvx";
-      args = [
-        "--from"
-        "uvx --from git+https://github.com/oraios/serena"
-        "serena-mcp-server"
-      ];
-    };
+    # "serena" = {
+    #   command = "uvx";
+    #   args = [
+    #     "--from"
+    #     "uvx --from git+https://github.com/oraios/serena"
+    #     "serena-mcp-server"
+    #   ];
+    # };
   }
 

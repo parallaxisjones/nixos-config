@@ -81,6 +81,12 @@
         "check-keys" = mkApp "check-keys" system;
         "rollback" = mkApp "rollback" system;
       };
+      overlays = let
+        overlayPath = ./overlays;
+        overlayFiles = builtins.attrNames (builtins.readDir overlayPath);
+        nixFiles = builtins.filter (f: builtins.match ".*\\.nix" f != null) overlayFiles;
+        toPath = f: overlayPath + ("/" + f);
+      in (map (p: import p) (map toPath nixFiles));
     in
     {
       devShells = forAllSystems devShell;
@@ -90,6 +96,7 @@
           inherit system;
           specialArgs = inputs // { user = workUser; };
           modules = [
+            ({ nixpkgs.overlays = overlays; })
             home-manager.darwinModules.home-manager
             nix-homebrew.darwinModules.nix-homebrew
             {

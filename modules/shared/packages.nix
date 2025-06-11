@@ -70,13 +70,6 @@ with pkgs; [
   noto-fonts-emoji
   pngquant
 
-  # PHP
-  php82
-  php82Packages.composer
-  php82Packages.php-cs-fixer
-  php82Extensions.xdebug
-  php82Packages.deployer
-  phpunit
   cargo
   # Node.js development tools
   fzf

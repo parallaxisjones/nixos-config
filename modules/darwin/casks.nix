@@ -10,7 +10,6 @@ _:
   "postico"
   "visual-studio-code"
   # "wireshark"
-
   # Communication Tools
   "discord"
   "loom"

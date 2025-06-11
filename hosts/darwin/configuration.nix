@@ -47,10 +47,7 @@ in
 
   # System-wide packages to install in /usr/local
   environment.systemPackages = with pkgs; [
-    nodejs
     vim
-    # neovim
-    tmux
     rage
     mcp-hub.packages.${system}.default
   ];

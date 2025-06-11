@@ -84,7 +84,7 @@ with pkgs; [
   nodePackages.nodemon
   nodePackages.prettier
   nodePackages.npm
-  nodejs
+  nodejs_20
 
   # Source code management, Git, GitHub tools
   gh

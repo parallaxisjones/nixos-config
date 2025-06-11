@@ -13,11 +13,11 @@ in
 
 {
   ".ssh/id_github.pub" = {
-    source = ./config/files/id_github.pub;
+    source = ./config/id_github.pub;
   };
 
   ".ssh/pgp_github.pub" = {
-    source = ./config/files/pgp_github.pub;
+    source = ./config/pgp_github.pub;
   };
 
   ".config/nvim" = {
@@ -26,10 +26,10 @@ in
   };
 
   ".config/op-setup.sh" = {
-    source = ./config/files/op-setup.sh;
+    source = ./config/op-setup.sh;
   };
 
   ".config/cheat/conf.yml" = {
-    source = ./config/files/cheat_conf.yml;
+    source = ./config/cheat_conf.yml;
   };
 } // cheatsheets

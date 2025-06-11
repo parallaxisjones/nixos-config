@@ -1,0 +1,14 @@
+# Gleam Project Management
+gleam new <project_name> - Create a new Gleam project
+gleam run               - Compile and run the project
+gleam test              - Run the project's tests
+gleam build             - Build the project without running
+
+# Gleam Dependencies
+gleam add <package_name> - Add a new dependency
+gleam remove <package_name> - Remove a dependency
+gleam update            - Update all dependencies
+
+# Gleam Tools
+gleam format            - Format all Gleam source code in the project
+gleam shell             - Start a shell with the project's dependencies available

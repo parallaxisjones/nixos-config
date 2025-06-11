@@ -1,0 +1,18 @@
+# Elixir Mix Tasks
+mix new <project_name> - Create a new Elixir project
+mix compile           - Compile the project
+mix run               - Run the project's main function
+mix test              - Run the project's tests
+
+# Elixir Dependencies
+mix deps.get          - Get all dependencies
+mix deps.update --all - Update all dependencies
+
+# Interactive Elixir (IEx)
+iex -S mix            - Start an IEx session with the project loaded
+h                     - Show helper documentation in IEx
+c "file.ex"         - Compile a file in IEx
+
+# Phoenix Framework (if used)
+mix phx.new <app_name> - Create a new Phoenix project
+mix phx.server        - Start the Phoenix server

@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 
 let
   githubPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAao6hYRda8Dc88DgWHblVFV/HFCcj6kJuDWq7oqt7Aq";
@@ -45,6 +45,14 @@ let
     =WFfO
     -----END PGP PUBLIC KEY BLOCK-----
   '';
+
+  cheatsheetPath = ./config/cheat/cheatsheets/system;
+  cheatsheetFiles = builtins.readDir cheatsheetPath;
+  mkCheatsheet = name: type: lib.nameValuePair ".config/cheat/cheatsheets/system/${name}" {
+    source = cheatsheetPath + "/${name}";
+  };
+  cheatsheets = lib.mapAttrs' mkCheatsheet (lib.filterAttrs (n: v: v == "regular") cheatsheetFiles);
+
 in
 
 {
@@ -72,4 +80,4 @@ in
     export TAVILY_API_KEY
     '';
   };
-}
+} // cheatsheets

@@ -1,0 +1,14 @@
+# Zig Build System
+zig init-exe          - Initialize a new executable project
+zig init-lib          - Initialize a new library project
+zig build             - Build the project using build.zig
+zig build test        - Run the tests for the project
+
+# Zig Commands
+zig run <file.zig>    - Compile and run a Zig source file
+zig test <file.zig>   - Compile and run tests in a Zig source file
+zig fmt .             - Format all Zig source code in the current directory
+
+# Zig Cross-compilation
+zig build -Dtarget=x86_64-windows -Drelease-safe - Compile for Windows
+zig build -Dtarget=aarch64-macos -Drelease-safe  - Compile for ARM macOS

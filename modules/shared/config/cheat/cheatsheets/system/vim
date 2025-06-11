@@ -1,0 +1,15 @@
+# Vim Motions
+h, j, k, l       - move left, down, up, right
+w, b             - move by word (forward/backward)
+e, ge            - move to end of word (forward/backward)
+0, ^, $          - move to start of line, first non-whitespace, end of line
+gg, G            - go to top, bottom of file
+<C-o>, <C-i>     - go to older, newer cursor position in jump list
+
+# Editing
+yy, dd, pp       - yank, delete, paste line
+yi", di", ci"   - yank, delete, change inside quotes
+ya", da", ca"   - yank, delete, change around quotes
+
+# Visual Mode
+v, V, <C-v>      - character, line, block visual mode

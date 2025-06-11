@@ -1,0 +1,16 @@
+# Nix Commands
+nix-build        - Build a Nix expression
+nix-shell        - Start an interactive shell
+nix-env -iA      - Install a package from a channel
+nix-env -e       - Uninstall a package
+nix-collect-garbage -d - Delete old generations of packages and profiles
+
+# Flakes
+nix flake update - Update flake inputs
+nix flake show   - Show the outputs of a flake
+nix run .#<app>  - Run a flake application
+nix develop .#<shell> - Start a development shell from a flake
+
+# System Management (NixOS & nix-darwin)
+nixos-rebuild switch - Rebuild and switch to the new NixOS configuration
+darwin-rebuild switch --flake . - Rebuild and switch to the new nix-darwin configuration

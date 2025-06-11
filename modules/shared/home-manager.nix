@@ -367,4 +367,5 @@ let name = "Parker Jones";
       bind-key -T copy-mode-vi 'C-\' select-pane -l
       '';
     };
+
 }

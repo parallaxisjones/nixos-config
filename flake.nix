@@ -53,6 +53,27 @@
             export EDITOR=nvim
           '';
         };
+        gleam = with pkgs; mkShell {
+          name = "gleam-shell";
+          buildInputs = [ erlang elixir gleam ];
+          shellHook = ''
+            echo "Entering Gleam shell"
+          '';
+        };
+        elixir = with pkgs; mkShell {
+          name = "elixir-shell";
+          buildInputs = [ erlang elixir ];
+          shellHook = ''
+            echo "Entering Elixir shell"
+          '';
+        };
+        zig = with pkgs; mkShell {
+          name = "zig-shell";
+          buildInputs = [ zig ];
+          shellHook = ''
+            echo "Entering Zig shell"
+          '';
+        };
       };
       mkApp = scriptName: system: {
         type = "app";

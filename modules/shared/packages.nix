@@ -32,9 +32,15 @@ with pkgs; [
   wget
   zip
   uv
-  rust-analyzer 
+  rust-analyzer
   rustfmt
   libiconv
+
+  # BEAM
+  gleam
+  elixir
+  erlang
+  zig
   # Encryption and security tools
   _1password-cli
   age
@@ -69,7 +75,7 @@ with pkgs; [
   noto-fonts
   noto-fonts-emoji
   pngquant
-
+  cheat
   cargo
   # Node.js development tools
   fzf
@@ -77,7 +83,7 @@ with pkgs; [
   nodePackages.nodemon
   nodePackages.prettier
   nodePackages.npm
-  # nodejs
+  nodejs
 
   # Source code management, Git, GitHub tools
   gh

@@ -1,9 +1,9 @@
 # overlays/nodejs-20-override.nix
-final: prev: {
-  # Make `pkgs.nodejs` actually be Node 20
+final: prev: rec {
+  # Rebind pkgs.nodejs to the nodejs_20 attribute
   nodejs = prev.nodejs_20;
 
-  # And also rewire nodePackages to that same Node 20
+  # Now override nodePackages so it all uses that same nodejs
   nodePackages = prev.nodePackages.override {
     inherit nodejs;
   };
